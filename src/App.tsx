@@ -5,7 +5,7 @@ function App() {
 
   return (
     <>
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 px-4">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-blue-50 px-4">
         <div className="max-w-md w-full text-center">
           <h1 className="text-4xl font-extrabold text-gray-900 mb-2">FullPatch</h1>
           <p className="text-lg text-gray-600 italic">
