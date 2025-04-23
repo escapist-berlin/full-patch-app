@@ -1,15 +1,33 @@
 import { useState } from 'react';
 import { parseDiscogsInput } from "./utils/inputParser";
+import { fetchTracklist } from './services/discogsService.ts';
+import { Track } from "./types/discogs.ts";
 
 function App() {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const [tracklist, setTracklist] = useState<Track[] | null>(null);
 
   const handleSubmit = async () => {
     setLoading(true);
+    setTracklist(null);
 
     const releaseId = parseDiscogsInput(input);
-    console.log('releaseId', releaseId);
+
+    if (! releaseId) {
+      console.error('Invalid discogs link or release code');
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const tracks = await fetchTracklist(releaseId);
+      console.log('tracks', tracks)
+      setTracklist(tracks);
+      setLoading(false);
+    } catch (err) {
+      console.error(`Failed to fetch tracklist for release ${releaseId}`, err);
+    }
   };
 
   return (
