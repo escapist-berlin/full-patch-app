@@ -57,6 +57,22 @@ function App() {
           >
             {loading ? 'Loading...' : 'Fetch Release'}
           </button>
+
+          {tracklist && (
+            <div className="mt-4 max-w-2xl w-full bg-violet-100 shadow-md p-4 rounded">
+              <h2 className="text-xl font-bold mb-4 text-center">Tracklist</h2>
+              <ul className="space-y-2 text-left">
+                {tracklist.map((track, index) => (
+                  <li key={index}>
+                    <strong>{track.position}</strong>
+                    {track.artists && ` — ${track.artists.map(artist => artist.name).join(', ')}`}
+                    {` — ${track.title}`}
+                    {track.duration && ` — ${track.duration}`}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </>
